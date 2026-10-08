@@ -59,7 +59,7 @@ const resultado = tareas.push('Programación');</code></pre>
         </button>
       </div>
       <div v-if="respuestas.p3" class="test-explicacion">
-        <strong>Explicación:</strong> El operador Spread (<code>...</code>) vuelca las propiedades del objeto antiguo en un objeto totalmente nuevo en memoria, sobrescribiendo la propiedad deseada de forma segura sin mutar el original [1.2].
+        <strong>Explicación:</strong> El operador Spread (<code>...</code>) vuelca las propiedades del objeto antiguo en un objeto totalmente nuevo en memoria, sobrescribiendo la propiedad deseada de forma segura sin mutar el original.
       </div>
     </div>
 
@@ -89,8 +89,8 @@ const resultado = tareas.push('Programación');</code></pre>
       <pre class="test-codigo"><code class="language-javascript">const users = [{edad: 20, active: true}, {edad: 30, active: false}];</code></pre>
       
       <div class="test-opciones">
-        <button @click="seleccionar('p5', 'A')" :class="['btn-opcion', { 'btn-incorrecto': respuestas.p5 === 'A' }]">
-          <span v-if="respuestas.p5 === 'A'">❌ </span>A) <code>users.filter(u => u.active).map(u => u.edad).reduce((a, b) => a + b, 0);</code>
+        <button @click="seleccionar('p5', 'A')" :class="['btn-opcion', { 'btn-correcto': respuestas.p5 === 'A' }]">
+          <span v-if="respuestas.p5 === 'A'">✅ </span>A) <code>users.filter(u => u.active).map(u => u.edad).reduce((a, b) => a + b, 0);</code>
         </button>
         <button @click="seleccionar('p5', 'B')" :class="['btn-opcion', { 'btn-incorrecto': respuestas.p5 === 'B' }]">
           <span v-if="respuestas.p5 === 'B'">❌ </span>B) <code>users.forEach(u => { if(u.active) total += u.edad });</code>
@@ -135,6 +135,7 @@ const seleccionar = (pregunta, opcion) => {
   font-weight: bold;
   margin-top: 0;
   font-size: 1.1rem;
+  color: var(--vp-c-text-1);
 }
 .test-codigo {
   margin: 1rem 0;
@@ -150,13 +151,13 @@ const seleccionar = (pregunta, opcion) => {
 }
 .btn-opcion {
   padding: 0.8rem 1rem;
-  text-align: left;
+  text-align: left; /* Eliminado textAlignment inline problemático */
   border: 1px solid var(--vp-c-border);
   border-radius: 6px;
   cursor: pointer;
   background-color: var(--vp-c-bg);
   transition: all 0.2s ease;
-  color: inherit;
+  color: var(--vp-c-text-1);
 }
 .btn-opcion:hover {
   border-color: var(--vp-c-brand);
@@ -179,5 +180,6 @@ const seleccionar = (pregunta, opcion) => {
   border-radius: 4px;
   margin-top: 1rem;
   font-size: 0.95rem;
+  color: var(--vp-c-text-1);
 }
 </style>
