@@ -1,25 +1,26 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: "Manual DWEC: De JS a Angular"
-  text: "Apuntes y prácticas ara el Ciclo Superior DAW"
-  tagline: My great project tagline
+  name: "Manual DWEC"
+  text: "El Puente de JavaScript a Angular"
+  tagline: "Ciclo Superior en Desarrollo de Aplicaciones Web (DAW) - Altair"
+  image:
+    src: https://angular.io
+    alt: Angular Logo
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: "Comenzar Repaso JS"
+      link: /bloque1-js
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: "Ver Práctica Espejo"
+      link: /practica-espejo
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 🚀 Nivelación ES6+
+    details: Dominio de métodos funcionales de arrays, asincronía real y el motor de JavaScript moderno antes de saltar a frameworks.
+  - title: 🛡️ TypeScript Robusto
+    details: Aprendizaje de tipado estático, interfaces y programación orientada a objetos para estructurar componentes limpios.
+  - title: 📐 Enfoque Práctico
+    details: Metodología basada en proyectos espejo para asimilar la transición tecnológica de forma lógica y sin frustraciones.
 ---
-
