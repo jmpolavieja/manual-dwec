@@ -18,8 +18,7 @@ export default defineConfig({
       {
         text: 'Nivelación JavaScript',
         items: [
-          { text: 'Bloque 1:JavaScript Moderno (ES6+)', link: '/bloque1-js' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'Bloque 1:JavaScript Moderno (ES6+)', link: '/bloque1-js' }
         ]
       },
       {
