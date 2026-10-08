@@ -7,7 +7,7 @@ export default defineConfig({
   description: "Apuntes y prácticas ara el Ciclo Superior DAW",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/assets/logo-transparente.png',
+    logo: 'logo-transparente.png',
     siteTitle: 'DWEC -DAW',
     nav: [
       { text: 'Home', link: '/' },

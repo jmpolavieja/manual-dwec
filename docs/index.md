@@ -6,8 +6,8 @@ hero:
   text: "El Puente de JavaScript a Angular"
   tagline: "Ciclo Superior en Desarrollo de Aplicaciones Web (DAW) - Altair"
   image:
-    src: https://angular.io
-    alt: Angular Logo
+    src: /logo-transparente.png
+    alt: Logotipo de Altair
   actions:
     - theme: brand
       text: "Comenzar Repaso JS"
