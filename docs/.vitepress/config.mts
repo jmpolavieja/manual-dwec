@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: 'manual-dwec/',
+  base: '/manual-dwec/',
   title: "Manual DWEC: De JS a Angular",
   description: "Apuntes y prácticas ara el Ciclo Superior DAW",
   themeConfig: {
