@@ -7,7 +7,7 @@ export default defineConfig({
   description: "Apuntes y prácticas ara el Ciclo Superior DAW",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: 'logo-transparente.png',
+    logo: 'Escudo.jpg',
     siteTitle: 'DWEC -DAW',
     nav: [
       { text: 'Home', link: '/' },
@@ -18,7 +18,8 @@ export default defineConfig({
       {
         text: 'Nivelación JavaScript',
         items: [
-          { text: 'Bloque 1:JavaScript Moderno (ES6+)', link: '/bloque1-js' }
+          { text: 'Bloque 1:JavaScript Moderno (ES6+)', link: '/bloque1-js' },
+          { text: '🏋️ Ejercicios y Autoevaluación', link: '/bloque1-ejercicios'},
         ]
       },
       {
