@@ -37,7 +37,7 @@ obtenerPostPorUsuario(2);
 A continuación tienes el cuestionario interactivo de repaso.
 
 <script setup>
-import Cuestionario from './components/Cuestionario.vue'
+import cuestionario from '@/components/cuestionario.vue'
 </script>
 
-<Cuestionario />
+<cuestionario />
