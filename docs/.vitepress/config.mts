@@ -31,6 +31,7 @@ export default defineConfig({
       {
         text: 'Evaluaciones',
         items: [
+          {text: 'Plantilla del proyecto Espejo (Fase 1)',link: '/practica-espejo-plantilla'  },
           { text: 'Práctica: Proyecto Espejo', link: '/practica-espejo' }
         ]
       }

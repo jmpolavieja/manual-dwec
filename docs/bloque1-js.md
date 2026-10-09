@@ -36,7 +36,7 @@ formulario.addEventListener('submit', (event) => {
 ```
 
 ---
-## 1.2 La Evolución de AJAX: de SMLHttpRequest a Fetch (Cómo viajan los datos).
+## 1.2 La Evolución de AJAX: de XMLHttpRequest a Fetch (Cómo viajan los datos).
 
 ::: info Concepto Clave: AJAX
 **AJAX (Asynchronous JavaScript and XML)** no es una tecnología en sí misma, sino un concepto: la capacidad de una página web de **solicitar datos a un servidor en segundo plano sin necesidad de recargar la página completa**. 

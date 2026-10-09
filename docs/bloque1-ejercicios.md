@@ -42,6 +42,37 @@ async function obtenerPostPorUsuario(userId) {
 obtenerPostPorUsuario(2);
 ```
 
+### Ejercicio 4: Generación Dinámica de Nodos (DOM Nactivo)
+**Enunciado:** Crea una estructura HTML básica con un contenedor vacío (`<div id="contenedor-usuarios"></div>`). Utilizando el siguiente array de datos simula la creación manual de "tarjetas de usuario". Debes recorrer el array y, por cada objeto, crear dinámicamente un elemento de tipo `div`, inyectar el nombre en un encabezado `<h3>`, el correo en un párrafo `<p>` y añadirle la clase CSS `.card-usuario`. Finalmente, introduce cada tarjeta dentro del contenedor principal usando `.appendChild()`.
+
+```javascript
+const usuariosLocales = [
+  { id: 1, nombre: 'Ana Gómez', email: 'ana@ies.es' },
+  { id: 2, nombre: 'Luis Martínez', email: 'luis@ies.es' }
+];
+
+// Tu código aquí abajo:
+```
+
+---
+
+### Ejercicio 5: Buscador Asíncrono de Usuarios (AJAX + DOM)
+**Enunciado:** Diseña una función asíncrona llamada `buscarPostPorId(postId)` que realice una petición HTTP mediante `fetch` a la URL de pruebas `https://typicode.com` (sustituyendo *ID* por el parámetro recibido). 
+
+El ejercicio debe cumplir obligatoriamente las siguientes fases:
+1. Capturar los datos devueltos (un único objeto con las propiedades `title` y `body`).
+2. Localizar un contenedor HTML con el id `#resultado-busqueda`.
+3. Inyectar dentro del contenedor el título del post en mayúsculas y el cuerpo del mismo empleando plantillas literales (`innerHTML`).
+4. Implementar un bloque `try/catch` para que, si el post no existe o la red falla, se pinte dentro del contenedor el mensaje de error: *"No se ha podido recuperar el post solicitado"*.
+
+```javascript
+// Tu código aquí abajo:
+async function buscarPostPorId(postId) {
+  // ...
+}
+```
+
+
 ## Pon a prueba tus conocimientos
 
 A continuación tienes el cuestionario interactivo de repaso.
