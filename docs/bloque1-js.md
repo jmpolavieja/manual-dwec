@@ -44,7 +44,7 @@ formulario.addEventListener('submit', (event) => {
 
 Es fundamental que comprendas cómo ha evolucionado esta técnica, ya que Angular utiliza un servicio basado en la versión más moderna y optimizada de este flujo.
 
-#### La Prehistoria: `XMLHttpRequest` (XHR)
+### La Prehistoria: `XMLHttpRequest` (XHR)
 Así se hacía tradicionalmente. El código era engorroso, propenso al "Callback Hell" y difícil de leer. **No lo uses en tus proyectos**, pero conócelo:
 
 ```javascript
