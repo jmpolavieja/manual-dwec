@@ -1,7 +1,7 @@
 # Estructura del Código Inicial (Fase 1)
-Crea una carpeta en tu ordenador con estos tres archivo básicos:
+Crea una carpeta en tu ordenador con estos tres archivos básicos:
 ## 1. `index.html`
-El esqueleto HTML proporciona los contenedores vacios con los `id` específicos donde se inyectarán la información, además del formulario de inserción.
+El esqueleto HTML proporciona los contenedores vacios con los `id` específicos donde se inyectará la información, además del formulario de inserción.
 ```html
 <!DOCTYPE html>
 <html lang="es">
@@ -150,8 +150,8 @@ ul {
 }
 ```
 ## 3. `app.js`(El esqueleto lógico)
-Este es el archivo crítico. Os dejo  los datos iniciales y laas funciones  vacías estructuradas. Debéis rellenar la lógica aplicado lo aprendido.
-``` javascrit
+Este es el archivo crítico. Os dejo  los datos iniciales y las funciones vacías estructuradas. Debéis rellenar la lógica aplicando lo aprendido.
+```javascrit
 // 1. Estado de la aplicación (Datos iniciales que simulan venir de una base de datos)
 let tareas = [
   { id: 1, titulo: 'Aprender la sintaxis de ES6', prioridad: 'Alta', completada: true },

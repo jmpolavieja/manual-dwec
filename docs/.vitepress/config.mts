@@ -34,7 +34,13 @@ export default defineConfig({
           {text: 'Plantilla del proyecto Espejo (Fase 1)',link: '/practica-espejo-plantilla'  },
           { text: 'Práctica: Proyecto Espejo', link: '/practica-espejo' }
         ]
-      }
+      },
+      {
+    text: 'Otros Recursos',
+    items: [
+      { text: '🛠️ Cómo se hizo esta web', link: '/anexo-vitepress' }
+    ]
+  }
     ],
 
     socialLinks: [
