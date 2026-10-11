@@ -1,5 +1,66 @@
 # Bloque 2: Fundamentos de TypeScript
 
+## ⚙️ 2.0 Entorno de Trabajo y el Compilador (`tsc`)
+
+::: warning Concepto Clave para el Aula
+**El navegador no entiende TypeScript.** Los motores de JavaScript de Chrome, Firefox o Safari solo saben ejecutar JavaScript puro. Por lo tanto, TypeScript funciona como una herramienta de desarrollo: escribimos código en archivos `.ts` y utilizamos el **Compilador de TypeScript (`tsc`)** para traducirlo o "transpilarlo" a archivos `.js` estándar.
+:::
+
+Vamos a configurar nuestro entorno local paso a paso en la terminal para entender cómo funciona este proceso antes de delegarlo automáticamente en Angular.
+
+### Paso 1: Instalación Global del Compilador
+Dado que TypeScript corre sobre el entorno de Node.js, abrimos nuestra terminal e instalamos el compilador oficial de forma global en el equipo para poder usar el comando `tsc`:
+
+```bash
+npm install -g typescript
+```
+*Para verificar que se ha instalado correctamente, ejecuta `tsc -v`. Debería devolverte la versión actual del compilador.*
+
+### Paso 2: Inicializar la Configuración (`tsconfig.json`)
+Cada proyecto tiene unas reglas de tipado y compilación diferentes (por ejemplo, si queremos que traduzca a código JS moderno o antiguo). Para generar el archivo de configuración oficial en la raíz de nuestra carpeta, ejecutamos:
+
+```bash
+tsc --init
+```
+Esto creará un archivo llamado **`tsconfig.json`**. Abre este archivo en VS Code y busca las siguientes propiedades clave para desomentarlas o editarlas:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",           // ¿A qué versión de JavaScript queremos traducir?
+    "module": "commonjs",         // El sistema de módulos a emplear
+    "rootDir": "./src",           // Dónde guardamos nuestros archivos fuente .ts
+    "outDir": "./dist",           // Dónde va a escupir el compilador los archivos .js traducidos
+    "strict": true,               // Activa el tipado estricto (Obligatorio en DAW)
+    "skipLibCheck": true          // Acelera la compilación saltándose la revisión de librerías
+  }
+}
+```
+
+### Paso 3: Estructura de Trabajo en Local
+Crea la siguiente estructura de carpetas en tu proyecto para mantener el código ordenado:
+```text
+mi-proyecto-ts/
+├── dist/                <-- Vacía (Aquí se generarán los .js automáticamente)
+├── src/
+│   └── app.ts           <-- Tu archivo de código TypeScript
+├── index.html           <-- Enlaza SIEMPRE a 'dist/app.js'
+└── tsconfig.json
+```
+
+### Paso 4: El Modo Observador (`--watch`)
+Estar ejecutando el comando `tsc` en la terminal cada vez que guardamos un archivo en VS Code es una pérdida de tiempo. TypeScript incluye un modo "espía" u observador. Ejecuta este comando en tu terminal y déjala abierta:
+
+```bash
+tsc --watch
+```
+A partir de este momento, cada vez que hagas un cambio en tu archivo `src/app.ts` y pulses guardar, **el compilador traducirá el código a `dist/app.js` en milisegundos de forma totalmente automática**. En tu `index.html`, solo tendrás que enlazar el archivo de la carpeta `dist`:
+
+```html
+<script src="dist/app.js"></script>
+```
+# Fundamentos de TypeScript: programando
+
 ::: info ¿Por qué TypeScript antes de Angular?
 JavaScript es un lenguaje dinámico: permite guardar un texto dentro de una variable que antes contenía un número, o llamar a funciones pasándole menos parámetros de los que necesita. Esto en aplicaciones grandes (como las que estructuramos con Angular) provoca errores impredecibles en producción. 
 
@@ -8,7 +69,7 @@ TypeScript es un **superconjunto (superset)** de JavaScript desarrollado por Mic
 
 ---
 
-## Semana 3: Tipado Estático e Interfaces
+## Tipado Estático e Interfaces
 
 ### 2.1 Tipos Primitivos y Arrays
 
@@ -61,7 +122,7 @@ const miTarea: Tarea = {
 
 ---
 
-## Semana 4: Programación Orientada a Objetos (POO)
+## Programación Orientada a Objetos (POO)
 
 Angular abandona la programación funcional clásica de JavaScript y abraza por completo la **POO basada en Clases**. Cualquier componente, servicio o módulo de Angular es, bajo el capó, una clase de TypeScript.
 
@@ -131,7 +192,7 @@ class AutenticadorCompacto {
 
 ## 🎯 El Enlace Final: Conectando con Angular
 
-Para terminar este bloque, mira cómo se fusiona todo lo que hemos aprendido en una estructura real de Angular. Fíjate en cómo una **Interfaz** (Semana 3) y una **Clase con modificadores** (Semana 4) forman la anatomía completa de un componente:
+Para terminar este bloque, mira cómo se fusiona todo lo que hemos aprendido en una estructura real de Angular. Fíjate en cómo una **Interfaz** y una **Clase con modificadores** forman la anatomía completa de un componente:
 
 ```typescript
 import { Component } from '@angular/core';
