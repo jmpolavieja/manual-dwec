@@ -1,8 +1,67 @@
 # Bloque 1: JavaScript Moderno (ES6+)
 
 En este bloque repasaremos los conceptos clave de JavaScript que utilizaremos constantemente en Angular. En el framework, casi toda la información viene en listas (arrays de objetos). Para pintarlas en el HTML no usamos bucles for tradicionales; usamos métodos funcionales: .map que tansforma un array en otro y .filter que crib los elementos.
-Además, para poder enender correctamente el funcionamiento del framework, es necsaio repasa cómo JavaScript accedey manipula el DOM, y maejar correctamente AJAX.
-## 1.1 Acceso y Manipulación del DOM  (El destino de los datos).
+Además, para poder entender correctamente el funcionamiento del framework, es necesario repasar cómo JavaScript accede y manipula el DOM, y manejar correctamente AJAX.
+Pero... ante todo, hechemos un vistazo a lo básico de JavaScript: variables, ámbitos y funciones flecha, la sintaxis y los conceptos más básicos de JavaScript.
+## 1.1 El Motor de JavaScript Moderno: Variables, Ámbito y Funciones Flecha
+
+Para entender la sintaxis limpia y compacta que utiliza Angular, primero debemos desterrar los vicios del JavaScript antiguo y comprender cómo gestiona el motor del navegador las variables y las funciones en la actualidad.
+
+### 1.1.1 Adiós a `var`: La llegada de `let` y `const`
+Tradicionalmente en JavaScript se utilizaba `var` para declarar variables. Esto introducía problemas graves como el *hoisting* (elevación) y la falta de control en los bloques de código. En el desarrollo moderno **el uso de `var` está completamente prohibido**.
+
+*   `let`: Se utiliza para variables cuyo valor va a cambiar a lo largo del tiempo.
+*   `const`: Se utiliza para constantes cuyos valores no van a reasignarse. **Por buena práctica, declara siempre por defecto tus variables con `const`**, y cámbialas a `let` únicamente si necesitas modificar su valor más adelante.
+
+```javascript
+const pi = 3.1416;
+// pi = 3.15; // ❌ Error: No se puede reasignar una constante.
+
+let contador = 0;
+contador++; //  Correcto: let permite la reasignación.
+```
+
+### 1.1.2 El Ámbito de Bloque (*Block Scope*)
+`let` y `const` introducen el concepto de **ámbito de bloque**. Un bloque de código es cualquier espacio delimitado entre llaves `{}` (como un `if`, un bucle `for` o una función). Las variables declaradas dentro de un bloque **mueren** al salir de él, protegiendo la memoria de la aplicación.
+
+```javascript
+let usuarioLogueado = true;
+
+if (usuarioLogueado) {
+  const tokenTemporal = "XYZ123";
+  var tokenAntiguo = "ABC987"; // ❌ Enfoque antiguo perjudicial
+  console.log(tokenTemporal); //  Funciona dentro del bloque
+}
+
+console.log(tokenAntiguo);   // ⚠️ ¡Funciona! var se "escapa" del bloque if (Peligroso).
+console.log(tokenTemporal);  // ❌ Error: tokenTemporal no está definido fuera del bloque.
+```
+
+### 1.1.3 Funciones Flecha (*Arrow Functions*)
+Las funciones flecha (`() => {}`) no son solo una forma más corta y elegante de escribir funciones estandarizadas; introducen una característica vital para Angular: **no crean su propio contexto para la palabra clave `this`**, sino que lo heredan de su entorno (ámbito léxico).
+
+```javascript
+// 1. Sintaxis clásica vs Sintaxis Flecha
+function duplicarClasico(numero) {
+  return numero * 2;
+}
+
+const duplicarFlecha = (numero) => numero * 2; // Retorno implícito en una línea
+
+// 2. El problema del contexto 'this' (Por qué Angular las necesita)
+const componenteReloj = {
+  segundos: 0,
+  arrancar: function() {
+    // Si usáramos una función clásica aquí, 'this' perdería la referencia al objeto
+    setInterval(() => {
+      this.segundos++; // 'this' apunta correctamente a componenteReloj
+      console.log(`Tiempo: ${this.segundos}s`);
+    }, 1000);
+  }
+};
+```
+
+## 1.2 Acceso y Manipulación del DOM  (El destino de los datos).
 ::: info ¿Qué es el DOM y por qué lo repasamos?
 El **DOM (Document Object Model)** es el árbol de objetos que el navegador genera a partir del HTML. En JavaScript tradicional, si queremos cambiar un texto en la pantalla, tenemos que buscar el nodo manualmente, leer el valor del input y modificar la propiedad de forma imperativa. 
 :::
@@ -36,7 +95,7 @@ formulario.addEventListener('submit', (event) => {
 ```
 
 ---
-## 1.2 La Evolución de AJAX: de XMLHttpRequest a Fetch (Cómo viajan los datos).
+## 1.3 La Evolución de AJAX: de XMLHttpRequest a Fetch (Cómo viajan los datos).
 
 ::: info Concepto Clave: AJAX
 **AJAX (Asynchronous JavaScript and XML)** no es una tecnología en sí misma, sino un concepto: la capacidad de una página web de **solicitar datos a un servidor en segundo plano sin necesidad de recargar la página completa**. 
@@ -81,7 +140,7 @@ async function cargarUsuarioAJAX() {
 
 cargarUsuarioAJAX();
 ```
-## 1.3 Métodos de Arrays (`map` y `filter`)
+## 1.4 Métodos de Arrays (`map` y `filter`)
 
 ```JavaScript
 // El array de datos que simulamos recibir de una base de datos
@@ -100,7 +159,7 @@ const nombresAlumnos = alumnos.map(alumno => alumno.nombre);
 console.log('Nombres:', nombresAlumnos); // Resultado: ['Ana', 'Carlos', 'María']
 ```
 
-## 1.4 Desetructuración y Operador Spread (...)
+## 1.5 Desetructuración y Operador Spread (...)
 Sirve para extraaer datos de objetos de forma limpia y para clonar/modifica estados de forma inmutale, algo obligatorio en frameworks modernos.
 
 
@@ -117,14 +176,14 @@ const nuevaConfiguracion = { ...configuracion, tema: 'claro' };
 console.log(nuevaConfiguracion.tema); // 'claro'
 console.log(configuracion.tema);      // 'oscuro' (Mantiene la integridad)
 ```
-### 1.2.1 ¿Por qué es obligatorio en frameworks modernos? (La Teoría)
+### 1.5.1 ¿Por qué es obligatorio en frameworks modernos? (La Teoría)
 En JavaScript tradicional (Vanilla JS), si modificamos un objeto, modificamos su "interior", pero la referencia en memoria sigue siendo la misma.
 
 * El problema: Si Angular tuviera que comprobar propiedad por propiedad dentro de cada objeto de la aplicación para ver si algo ha cambiado, las páginas web irían lentísimas (sería ineficiente).
 
 * La solución (Inmutabilidad): Los frameworks modernos aplican una regla: "No modifiques el objeto antiguo; si algo cambia, dame un objeto completamente nuevo". Angular solo tiene que mirar si la dirección de memoria del objeto ha cambiado. Si es una dirección nueva, redibuja la pantalla al instante. Es una comprobación ultrarrápida [1.2].
 
-### 1.2.2 Código: Mutación vs. Inmutabilidad
+### 1.5.2 Código: Mutación vs. Inmutabilidad
 Aquí tienes el ejemplo perfecto para mostrar en clase la diferencia entre "destruir" un dato o clonarlo de forma limpia.
 
 #### ❌ El enfoque incorrecto (Mutación de datos)
@@ -182,7 +241,7 @@ const nuevasTareas = [...tareas, 'Aprender Angular'];
 
 console.log(nuevasTareas); // ['Estudiar JS', 'Configurar VitePress', 'Aprender Angular']
 ```
-### 1.2.3 Aplicado a Arrays (Muy común en Angular)
+### 1.5.3 Aplicado a Arrays (Muy común en Angular)
 Lo que te pide el cuerpo para añadir un elemento a una lista de Angular es utilizar .push(). Hay que enseñarles que .push() muta el array original. Hay que usar el operador spread para crear un array nuevo.
 ```javascript
 const tareas = ['Estudiar JS', 'Configurar VitePress'];
@@ -194,7 +253,7 @@ const nuevasTareas = [...tareas, 'Aprender Angular'];
 
 console.log(nuevasTareas); // ['Estudiar JS', 'Configurar VitePress', 'Aprender Angular']
 ```
-## 1.5 Asincronía Pura (async/await)
+## 1.6 Asincronía Pura (async/await)
 Angular utiliza servicios para conectarse a APIs de internet. El código de internet tarda en llegar (asincronía), si no se entiende esto romperemos la aplicación. Primero lo vemos con el estándar de JavaScript (fetch).
 ```javascript
 // Función asíncrona para obtener usuarios de una API de pruebas
