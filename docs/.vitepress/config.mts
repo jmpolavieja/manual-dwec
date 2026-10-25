@@ -21,7 +21,7 @@ export default defineConfig({
           { text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bloque1-js" },
           {
             text: "🏋️ Ejercicios y Autoevaluación",
-            link: "/bloque1-ejercicios",
+            link: "/bloque1/bloque1-ejercicios",
           },
         ],
       },
@@ -31,7 +31,7 @@ export default defineConfig({
           { text: "Bloque 2: Fundamentos de TypeScript", link: "/bloque2-ts" },
           {
             text: "🏋️ Banco de Retos Prácticos: TypeScript",
-            link: "/bloque2-ejercicios",
+            link: "/bloque2/bloque2-ejercicios",
           },
         ],
       },
@@ -40,7 +40,7 @@ export default defineConfig({
         items: [
           {
             text: "Bloque 3: Componentes y Directivas",
-            link: "/bloque3-angular",
+            link: "/bloque3/bloque3-angular",
           },
         ],
       },
@@ -50,11 +50,11 @@ export default defineConfig({
           { text: "📊 Criterios y Cronograma", link: "/evaluacion-criterios" },
           {
             text: "Práctica: Proyecto Espejo (Fase 1)",
-            link: "/practica-espejo-plantilla",
+            link: "/bloque1/practica-espejo-plantilla",
           },
           {
             text: "Práctica: Refactor TS (Fase 2)",
-            link: "/practica-espejo-fase2",
+            link: "/bloque2/practica-espejo-fase2",
           },
         ],
       },

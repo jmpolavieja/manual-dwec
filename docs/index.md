@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: "🚀 Comenzar Manual"
-      link: /bloque1-js
+      link: /bloque1/bloque1-js
     - theme: alt
       text: "📊 Ver Planificación y Notas"
       link: /evaluacion-criterios
