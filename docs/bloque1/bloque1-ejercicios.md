@@ -78,7 +78,7 @@ async function buscarPostPorId(postId) {
 A continuación tienes el cuestionario interactivo de repaso.
 
 <script setup>
-import Cuestionario from './components/Cuestionario_1.vue'
+import Cuestionario from '/components/Cuestionario_1.vue'
 
 </script>
 
