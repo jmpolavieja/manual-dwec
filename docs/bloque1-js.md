@@ -275,3 +275,161 @@ async function obtenerUsuarios() {
 
 obtenerUsuarios();
 ```
+
+## 1.7 Patrones Avanzados del DOM: Delegación de Eventos y Arquitectura Espejo
+
+Cuando desarrollamos aplicaciones reales en el entorno cliente, no basta con que el código "funcione". Es fundamental que la aplicación sea **eficiente en el consumo de memoria** y que su estructura esté **desacoplada**, preparando el terreno para el flujo de trabajo que utilizaremos en Angular.
+
+### 1.7.1 Optimización de Memoria: Delegación de Eventos (*Event Delegation*)
+
+Un error muy común al renderizar listas dinámicas es asignar un escuchador de eventos (`addEventListener`) a cada elemento individual (como un botón de eliminar o modificar) dentro de un bucle `forEach`.
+
+* **El Problema:** Si la lista crece a 1000 elementos, el navegador tendrá que mantener 1000 funciones "oyentes" activas en la memoria RAM de forma simultánea. Esto degrada drásticamente el rendimiento del cliente.
+* **La Solución (Delegación):** Consiste en aprovechar la **propagación de eventos** (*Event Bubbling*) nativa del navegador. En lugar de escuchar en cada hijo, asignamos **un único escuchador en el contenedor padre** (`<ul>` o `<div>`). Cuando el usuario hace click en un botón hijo, el evento "burbujea" hacia arriba, el padre lo caza y averiguamos qué elemento se pulsó mediante `event.target`.
+
+#### ❌ Enfoque Ineficiente (Saturación de memoria)
+```javascript
+// Renderiza e inyecta un listener individual por cada iteración
+tareasFiltradas.forEach(tarea => {
+  const li = document.createElement('li');
+  const boton = document.createElement('button');
+  boton.textContent = 'Completar';
+
+  // ❌ INCORRECTO: 1000 tareas crearán 1000 listeners redundantes en memoria
+  boton.addEventListener('click', () => {
+    cambiarEstadoTarea(tarea.id);
+  });
+
+  li.appendChild(boton);
+  listaContenedor.appendChild(li);
+});
+```
+
+#### ✅ Enfoque Optimizado (Delegación de Eventos)
+```javascript
+// 1. Al renderizar, solo inyectamos los datos en un atributo 'data-' en el HTML
+tareasFiltradas.forEach(tarea => {
+  const li = document.createElement('li');
+  li.innerHTML = `
+    <span>${tarea.titulo}</span>
+    <button data-id="${tarea.id}" class="btn-accion">Completar</button>
+  `;
+  listaContenedor.appendChild(li);
+});
+
+// 2. ✅ CORRECTO: Un único listener en el contenedor padre para toda la lista
+listaContenedor.addEventListener('click', (event) => {
+  // Comprobamos si el elemento que originó el click contiene la clase del botón
+  if (event.target.classList.contains('btn-accion')) {
+    // Recuperamos el ID guardado de forma segura en el atributo 'data-id'
+    const idBuscar = parseInt(event.target.dataset.id, 10);
+    
+    // Ejecutamos la lógica de negocio mutando el estado de forma inmutable
+    tareas = tareas.map(t => t.id === idBuscar ? { ...t, completada: !t.completada } : t);
+    
+    pintarTareas();
+  }
+});
+```
+
+---
+
+### 1.7.2 Desacoplamiento de Interfaces: La Arquitectura Espejo
+
+En el desarrollo de software moderno, es habitual que diferentes usuarios visualicen **los mismos datos pero con distintos niveles de interacción**. Por ejemplo, un administrador necesita botones para editar el inventario, mientras que un cliente en una pantalla externa solo debe ver el stock disponible en tiempo real de **solo lectura**.
+
+La **Arquitectura Espejo** consiste en diseñar la aplicación bajo el principio de **Única Fuente de la Verdad** (*Single Source of Truth*):
+1. Los componentes visuales no guardan información; solo obedecen al **Estado** (nuestro array de objetos en memoria).
+2. Cuando el estado cambia, el motor de renderizado actualiza **en paralelo y al unísono** múltiples interfaces independientes conectadas a él.
+
+#### 🏗️ Estructura del DOM Desacoplada (HTML)
+```html
+<!-- Bloque 1: Interfaz del Administrador (Interactiva con botones) -->
+<h2>Gestión de Tareas</h2>
+<ul id="lista-tareas"></ul>
+
+<!-- Bloque 2: Interfaz Espejo del Cliente (Solo Lectura, sin interacción directa) -->
+<h2>Monitor de Estado (Vista Cliente)</h2>
+<ul id="lista-espejo"></ul>
+```
+
+#### ⚙️ Implementación del Motor de Renderizado Sincrónico (JS)
+```javascript
+function pintarTareas() {
+  // Limpiamos ambos contenedores de golpe de forma eficiente
+  listaContenedor.replaceChildren(); // Zona interactiva
+  listaEspejo.replaceChildren();     // Zona espejo
+
+  tareas.forEach(tarea => {
+    // --- 1. RENDERIZADO EN ZONA INTERACTIVA ---
+    const liOriginal = document.createElement('li');
+    liOriginal.innerHTML = `
+      <span>${tarea.titulo}</span>
+      <button data-id="${tarea.id}" class="btn-accion">Alternar Estado</button>
+    `;
+    listaContenedor.appendChild(liOriginal);
+
+    // --- 2. RENDERIZADO EN INTERFAZ ESPEJO (SOLO LECTURA) ---
+    // Refleja exactamente los mismos cambios en tiempo real pero capa los botones
+    const liEspejo = document.createElement('li');
+    liEspejo.className = tarea.completada ? 'completada' : 'pendiente';
+    liEspejo.innerHTML = `
+      <span>[RÉPLICA] ${tarea.titulo} — Estado: <strong>${tarea.completada ? 'Hecho' : 'Pendiente'}</strong></span>
+    `;
+    listaEspejo.appendChild(liEspejo);
+  });
+}
+```
+
+---
+
+### 1.7.3 El Puente Hacia Angular: Directivas Reactivas (`@if` y `@for`)
+
+Comprender la fontanería interna de vaciar contenedores y duplicar interfaces en JavaScript nativo es vital, ya que es exactamente lo que **Angular automatiza por debajo**. 
+
+En el framework, no manipulamos nodos manualmente ni creamos elementos en memoria. Definimos un único estado en la lógica de TypeScript (`.ts`) y dejamos que el motor declarativo de la plantilla HTML proyecte los cambios en las diferentes vistas conectadas (interactivas o de solo lectura) utilizando **flujos de control nativos**.
+
+#### El Equivalente en el Componente Angular (`.ts`)
+```typescript
+// El Estado actúa como la única fuente de la verdad para todas las vistas
+tareas = [
+  { id: 1, titulo: 'Aprender la sintaxis de ES6', prioridad: 'Alta', completada: true },
+  { id: 2, titulo: 'Dominar la asincronía y Fetch', prioridad: 'Media', completada: false }
+];
+
+alternarEstado(id: number) {
+  this.tareas = this.tareas.map(t => t.id === id ? { ...t, completada: !t.completada } : t);
+}
+```
+
+#### Vista 1: Panel de Control Interactivo (HTML Administrador)
+```html
+<ul>
+  @for (tarea of tareas; track tarea.id) {
+    <li>
+      <span>{{ tarea.titulo }}</span>
+      <!-- Delegación de eventos nativa gestionada por Angular -->
+      <button (click)="alternarEstado(tarea.id)">Alternar</button>
+    </li>
+  }
+</ul>
+```
+
+#### Vista 2: Monitor Espejo Protegido (HTML Cliente con `@if`)
+Pintamos exactamente la misma información en paralelo, pero resolvemos las restricciones de solo lectura y las etiquetas condicionales de forma elegante con la directiva `@if`, sin duplicar lógica de negocio:
+```html
+<ul>
+  @for (tarea of tareas; track tarea.id) {
+    <li [class.completada]="tarea.completada">
+      <span>[MONITOR] {{ tarea.titulo }}</span>
+      
+      <!-- 🎯 Renderizado condicional espejo directo en la plantilla -->
+      @if (tarea.completada) {
+        <span class="badge-success">✅ Hecho</span>
+      } @else {
+        <span class="badge-warning">⏳ Pendiente</span>
+      }
+    </li>
+  }
+</ul>
+```

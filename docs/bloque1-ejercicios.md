@@ -15,7 +15,7 @@ const stock = [
 // Tu código aquí abajo:
 ```
 
-## Ejercicio 2: Actualización inuta-Carrito (Nivel Medio)
+## Ejercicio 2: Actualización minuta-Carrito (Nivel Medio)
 
 **Enunciado**: Tienes el estado actual del carrito de la compra de un usuario. El usuario ha decidido modificar las unidades del artículo con id: 102 a **3 unidades**. Recuerda las normas de los frameworks modernos: **no puedes mutar el objeto original**. Utiliza el método .map() y el operador Spread (...) para devolver un carrito totalmente nuevo con el dato actualizado [1.2]
 
