@@ -18,7 +18,7 @@ export default defineConfig({
       {
         text: "Nivelación JavaScript",
         items: [
-          { text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bolque1/bloque1-js" },
+          { text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bloque1/bloque1-js" },
           {
             text: "🏋️ Ejercicios y Autoevaluación",
             link: "/bloque1/bloque1-ejercicios",
