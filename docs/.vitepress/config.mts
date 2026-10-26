@@ -11,14 +11,14 @@ export default defineConfig({
     siteTitle: "DWEC -DAW",
     nav: [
       { text: "Home", link: "/" },
-      { text: "Apuntes", link: "/bloque1-js" },
+      { text: "Apuntes", link: "/bloque1/bloque1-js" },
     ],
 
     sidebar: [
       {
         text: "Nivelación JavaScript",
         items: [
-          { text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bloque1-js" },
+          { text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bolque1/bloque1-js" },
           {
             text: "🏋️ Ejercicios y Autoevaluación",
             link: "/bloque1/bloque1-ejercicios",
@@ -28,7 +28,7 @@ export default defineConfig({
       {
         text: "El Puente a Angular",
         items: [
-          { text: "Bloque 2: Fundamentos de TypeScript", link: "/bloque2-ts" },
+          { text: "Bloque 2: Fundamentos de TypeScript", link: "/bloque2/bloque2-ts" },
           {
             text: "🏋️ Banco de Retos Prácticos: TypeScript",
             link: "/bloque2/bloque2-ejercicios",
