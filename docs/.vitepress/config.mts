@@ -1,4 +1,4 @@
-import { defineConfig } from "vitepress";
+import {defineConfig} from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -10,15 +10,15 @@ export default defineConfig({
     logo: "Escudo.jpg",
     siteTitle: "DWEC -DAW",
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Apuntes", link: "/bloque1/bloque1-js" },
+      {text: "Home", link: "/"},
+      {text: "Apuntes", link: "/bloque1/bloque1-js"},
     ],
 
     sidebar: [
       {
         text: "Nivelación JavaScript",
         items: [
-          { text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bloque1/bloque1-js" },
+          {text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bloque1/bloque1-js"},
           {
             text: "🏋️ Ejercicios y Autoevaluación",
             link: "/bloque1/bloque1-ejercicios",
@@ -28,7 +28,8 @@ export default defineConfig({
       {
         text: "El Puente a Angular",
         items: [
-          { text: "Bloque 2: Fundamentos de TypeScript", link: "/bloque2/bloque2-ts" },
+          {text: "Bloque 2: Fundamentos de TypeScript", link: "/bloque2/bloque2-ts"},
+          {text: "Bloque 2: Ejercicios de ejemplo", link: "/bloque2/bloque2-ejemplos-ts"},
           {
             text: "🏋️ Banco de Retos Prácticos: TypeScript",
             link: "/bloque2/bloque2-ejercicios",
@@ -47,7 +48,7 @@ export default defineConfig({
       {
         text: "Evaluaciones",
         items: [
-          { text: "📊 Criterios y Cronograma", link: "/evaluacion-criterios" },
+          {text: "📊 Criterios y Cronograma", link: "/evaluacion-criterios"},
           {
             text: "Práctica: Proyecto Espejo (Fase 1)",
             link: "/bloque1/practica-espejo-plantilla",
@@ -60,10 +61,10 @@ export default defineConfig({
       },
       {
         text: "Otros Recursos",
-        items: [{ text: "🛠️ Cómo se hizo esta web", link: "/anexo-vitepress" }],
+        items: [{text: "🛠️ Cómo se hizo esta web", link: "/anexo-vitepress"}],
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://github.com" }],
+    socialLinks: [{icon: "github", link: "https://github.com"}],
   },
 });
