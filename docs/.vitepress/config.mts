@@ -29,11 +29,15 @@ export default defineConfig({
         text: "El Puente a Angular",
         items: [
           {text: "Bloque 2: Fundamentos de TypeScript", link: "/bloque2/bloque2-ts"},
-          {text: "Bloque 2: Ejercicios de ejemplo", link: "/bloque2/bloque2-ejemplos-ts"},
+          {text: "Bloque 2: Ejercicios 1", link: "/bloque2/bl2-ejercicios-1"},
           {
-            text: "🏋️ Banco de Retos Prácticos: TypeScript",
-            link: "/bloque2/bloque2-ejercicios",
+            text: "Bloque 2: Ejercicios 2",
+            link: "/bloque2/ejercicios/bl2-ejercicios-2",
           },
+          {
+            text: "Bloque 2: Ejercicios 3",
+            link: "/bloque2/ejercicios/bl2-ejercicios-3"
+          }
         ],
       },
       {
