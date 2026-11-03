@@ -53,6 +53,7 @@ let usuarios: Usuario[] = [
   // TODO: Agrega aquí los objetos iniciales de prueba
 ];
 ```
+
 ::: details 💡 Ver Solución del Ejercicio
 
 export interface Usuario {
@@ -64,8 +65,9 @@ export interface Usuario {
   biografia?: string; // Propiedad opcional
 }
 :::
-```
+
 ## 2. index.html
+
 ```
 <!DOCTYPE html>
 <html lang="es">
@@ -100,7 +102,7 @@ export interface Usuario {
   <script src="dist/app.js"></script>
 </body>
 </html>
-```
+
 ## 3. style.css
 ```
 :root {
