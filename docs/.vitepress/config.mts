@@ -18,7 +18,10 @@ export default defineConfig({
       {
         text: "Nivelación JavaScript",
         items: [
-          {text: "Bloque 1:JavaScript Moderno (ES6+)", link: "/bloque1/bloque1-js"},
+          {
+            text: "Bloque 1:JavaScript Moderno (ES6+)", 
+            link: "/bloque1/bloque1-js"
+          },
           {
             text: "🏋️ Ejercicios y Autoevaluación",
             link: "/bloque1/bloque1-ejercicios",
@@ -34,10 +37,10 @@ export default defineConfig({
             text: "Bloque 2: Ejercicios 2",
             link: "/bloque2/ejercicios/bl2-ejercicios-2",
           },
-          /* {
-            text: "Bloque 2: Ejercicios 3",
-            link: "/bloque2/ejercicios/bl2-ejercicios-3"
-          } */
+          {
+            text: "Bloque 2: Retos y Autoevaluación",
+            link: "/bloque2/ejercicios/bloque2-ejercicios"
+          } 
         ],
       },
       {
