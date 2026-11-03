@@ -34,10 +34,10 @@ export default defineConfig({
             text: "Bloque 2: Ejercicios 2",
             link: "/bloque2/ejercicios/bl2-ejercicios-2",
           },
-          {
+          /* {
             text: "Bloque 2: Ejercicios 3",
             link: "/bloque2/ejercicios/bl2-ejercicios-3"
-          }
+          } */
         ],
       },
       {
