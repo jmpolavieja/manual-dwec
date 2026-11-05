@@ -12,6 +12,9 @@ export default defineConfig({
     nav: [
       {text: "Home", link: "/"},
       {text: "Apuntes", link: "/bloque1/bloque1-js"},
+      { text: 'TypeScript', link: '/bloque2/bloque2-ts' },
+      { text: 'Angular', link: '/bloque3/bloque3-angular' },
+      { text: 'Criterios', link: '/evaluacion-criterios' }
     ],
 
     sidebar: [
@@ -19,7 +22,7 @@ export default defineConfig({
         text: "Nivelación JavaScript",
         items: [
           {
-            text: "Bloque 1:JavaScript Moderno (ES6+)", 
+            text: "Bloque 1: JavaScript Moderno (ES6+)",
             link: "/bloque1/bloque1-js"
           },
           {
@@ -44,12 +47,28 @@ export default defineConfig({
         ],
       },
       {
-        text: "Desembarco en Angular",
+        text: "Bloque 3: Angular Standalone",
         items: [
           {
-            text: "Bloque 3: Componentes y Directivas",
+            text: "3.0 Introducción al Framwork",
             link: "/bloque3/bloque3-angular",
           },
+          {
+            text: '3.1 Entorno Angular CLI y Componentes',
+            link: '/bloque3/semana5-componentes'
+          },
+          {
+            text: '3.2 Data Binding y Directivas (@if / @for)',
+            link: '/bloque3/semana6-databinding'
+          },
+          {
+            text: '3.3 Comunicación (@Input/@Output) y Servicios',
+            link: '/bloque3/semana7-servicios'
+          },
+          {
+            text: '🏁 Proyecto Espejo - Fase 3 (Angular)',
+            link: '/bloque3/practica-espejo-fase3'
+          }
         ],
       },
       {
