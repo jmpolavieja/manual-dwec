@@ -12,10 +12,10 @@ export default defineConfig({
     nav: [
       {text: "Home", link: "/"},
       {text: "Apuntes", link: "/bloque1/bloque1-js"},
-      { text: 'TypeScript', link: '/bloque2/bloque2-ts' },
-      { text: 'Angular', link: '/bloque3/bloque3-angular' },
-      { text: 'Ang.Avanzado', link: '/bloque4/bloque4-angular-avanzado'},
-      { text: 'Criterios', link: '/evaluacion-criterios' }
+      {text: 'TypeScript', link: '/bloque2/bloque2-ts'},
+      {text: 'Angular', link: '/bloque3/bloque3-angular'},
+      {text: 'Ang.Avanzado', link: '/bloque4/bloque4-angular-avanzado'},
+      {text: 'Criterios', link: '/evaluacion-criterios'}
     ],
 
     sidebar: [
@@ -44,7 +44,7 @@ export default defineConfig({
           {
             text: "Bloque 2: Retos y Autoevaluación",
             link: "/bloque2/ejercicios/bloque2-ejercicios"
-          } 
+          }
         ],
       },
       {
@@ -70,50 +70,54 @@ export default defineConfig({
             text: '🏁 Proyecto Espejo - Fase 3 (Angular)',
             link: '/bloque3/practica-espejo-fase3'
           },
+        ]
+      },
+      {
+        text: 'Bloque 4: Angular Avanzado',
+        items: [
           {
-            text: 'Bloque 4: Angular Avanzado',
-            collapsed: false,
-            items: [
-              {
-                text: '4.1 Enrutamiento y Navegación SPA',
-                link: '/bloque4/semana9-routing'
-              },
-              {
-                text: '4.2 Consumo de APIs REST (HttpClient & RxJS)',
-                link: '/bloque4/semana11-httpclient'
-              },
-              {
-                text: '4.3 Formularios Reactivos y Validaciones',
-                link: '/bloque4/semana13-formularios'
-              },
-              {
-                text: '4.4 Angular Material y Signals',
-                link: '/bloque4/semana15-material-signals'
-              }
-            ]
+            text: '4.1 Enrutamiento y Navegación SPA',
+            link: '/bloque4/semana9-routing'
+          },
+          {
+            text: '4.2 Consumo de APIs REST (HttpClient & RxJS)',
+            link: '/bloque4/semana11-httpclient'
+          },
+          {
+            text: '4.3 Formularios Reactivos y Validaciones',
+            link: '/bloque4/semana13-formularios'
+          },
+          {
+            text: '4.4 Angular Material y Signals',
+            link: '/bloque4/semana15-material-signals'
           }
-        ],
+        ]
       },
       {
         text: "Evaluaciones",
-        items: [
-          {text: "📊 Criterios y Cronograma", link: "/evaluacion-criterios"},
-          {
-            text: "Práctica: Proyecto Espejo (Fase 1)",
-            link: "/bloque1/practica-espejo-plantilla",
-          },
-          {
-            text: "Práctica: Refactor TS (Fase 2)",
-            link: "/bloque2/practica-espejo-fase2",
-          },
-        ],
-      },
+        items:
+          [
+            {text: "📊 Criterios y Cronograma", link: "/evaluacion-criterios"},
+            {
+              text: "Práctica: Proyecto Espejo (Fase 1)",
+              link: "/bloque1/practica-espejo-plantilla",
+            },
+            {
+              text: "Práctica: Refactor TS (Fase 2)",
+              link: "/bloque2/practica-espejo-fase2",
+            },
+          ],
+      }
+      ,
       {
         text: "Otros Recursos",
-        items: [{text: "🛠️ Cómo se hizo esta web", link: "/anexo-vitepress"}],
-      },
+        items:
+          [{text: "🛠️ Cómo se hizo esta web", link: "/anexo-vitepress"}],
+      }
+      ,
     ],
 
     socialLinks: [{icon: "github", link: "https://github.com"}],
   },
-});
+})
+;
