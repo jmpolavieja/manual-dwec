@@ -14,6 +14,7 @@ export default defineConfig({
       {text: "Apuntes", link: "/bloque1/bloque1-js"},
       { text: 'TypeScript', link: '/bloque2/bloque2-ts' },
       { text: 'Angular', link: '/bloque3/bloque3-angular' },
+      { text: 'Ang.Avanzado', link: '/bloque4/bloque4-angular-avanzado'},
       { text: 'Criterios', link: '/evaluacion-criterios' }
     ],
 
@@ -68,6 +69,28 @@ export default defineConfig({
           {
             text: '🏁 Proyecto Espejo - Fase 3 (Angular)',
             link: '/bloque3/practica-espejo-fase3'
+          },
+          {
+            text: '🚀 Bloque 4: Angular Avanzado',
+            collapsed: false,
+            items: [
+              {
+                text: '4.1 Enrutamiento y Navegación SPA',
+                link: '/bloque4/semana9-routing'
+              },
+              {
+                text: '4.2 Consumo de APIs REST (HttpClient & RxJS)',
+                link: '/bloque4/semana11-httpclient'
+              },
+              {
+                text: '4.3 Formularios Reactivos y Validaciones',
+                link: '/bloque4/semana13-formularios'
+              },
+              {
+                text: '4.4 Angular Material y Signals',
+                link: '/bloque4/semana15-material-signals'
+              }
+            ]
           }
         ],
       },
