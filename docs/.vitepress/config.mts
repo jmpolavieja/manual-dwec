@@ -51,7 +51,7 @@ export default defineConfig({
         text: "Bloque 3: Angular Standalone",
         items: [
           {
-            text: "3.0 Introducción al Framwork",
+            text: "3.0 Introducción al Framework",
             link: "/bloque3/bloque3-angular",
           },
           {
@@ -71,7 +71,7 @@ export default defineConfig({
             link: '/bloque3/practica-espejo-fase3'
           },
           {
-            text: '🚀 Bloque 4: Angular Avanzado',
+            text: 'Bloque 4: Angular Avanzado',
             collapsed: false,
             items: [
               {
