@@ -1,14 +1,15 @@
-# ⚡ Semana 6: Data Binding y Directivas Estructurales Modernas (`@if` / `@for`)
+# ⚡ 3.2. Data Binding y Directivas Estructurales Modernas (`@if` - `@for`)
 
-En esta semana exploramos la sincronización bidireccional entre la clase TypeScript y la vista HTML mediante las técnicas de **Data Binding** y las **directivas estructurales modernas** introducidas en las últimas versiones de Angular.
+En esta semana exploramos la sincronización bidireccional entre la clase TypeScript y la vista HTML mediante las
+técnicas de **Data Binding** y las **directivas estructurales modernas** introducidas en las últimas versiones de
+Angular.
 
----
-
-## 3.3 Técnicas de Enlazado de Datos (*Data Binding*)
+## Técnicas de Enlazado de Datos (_Data Binding_)
 
 Angular ofrece tres mecanismos fundamentales para comunicar el código de TypeScript con la plantilla HTML:
 
-### 1. Interpolación (`{{ }}`)
+### 1. Interpolación (`{{ }}`) {v-pre}
+
 Muestra el valor de una propiedad o el resultado de una expresión de TypeScript directamente en la plantilla como texto:
 
 ```html
@@ -17,7 +18,9 @@ Muestra el valor de una propiedad o el resultado de una expresión de TypeScript
 ```
 
 ### 2. Property Binding (`[propiedad]="expresion"`)
-Enlaza el valor de una variable de TypeScript a un atributo o propiedad de un elemento del DOM en el HTML (unidireccional: clase ➔ HTML):
+
+Enlaza el valor de una variable de TypeScript a un atributo o propiedad de un elemento del DOM en el HTML
+(unidireccional: clase ➔ HTML):
 
 ```html
 <!-- Enlaza el estado deshabilitado de un botón -->
@@ -30,9 +33,12 @@ Enlaza el valor de una variable de TypeScript a un atributo o propiedad de un el
 ```
 
 ### 3. Event Binding (`(evento)="metodo()"`)
-Escucha los eventos del usuario en el DOM y ejecuta métodos definidos en la clase TypeScript (unidireccional: HTML ➔ clase):
+
+Escucha los eventos del usuario en el DOM y ejecuta métodos definidos en la clase TypeScript (unidireccional: HTML ➔
+clase):
 
 ```html
+
 <button (click)="guardarTarea()">Guardar</button>
 <input type="text" (input)="onInputText($event)">
 ```
@@ -41,7 +47,94 @@ Escucha los eventos del usuario en el DOM y ejecuta métodos definidos en la cla
 
 ## 3.4 Directivas Estructurales Modernas
 
-Las directivas estructurales permiten manipular la estructura del DOM directamente desde la plantilla de forma declarativa.
+Las directivas estructurales permiten manipular la estructura del DOM directamente desde la plantilla de forma
+declarativa.
+
+### 🧩 ¿Qué es una Directiva en Angular?
+
+::: info
+Concepto Clave para el Aula En Angular, una directiva es una instrucción especial o extensión de sintaxis que se añade a
+los elementos HTML para modificar su comportamiento, su apariencia o la propia estructura del árbol DOM de forma
+declarativa
+A diferencia de JavaScript Vanilla, donde debías buscar manualmente los nodos con document.querySelector e inyectar
+elementos con appendChild
+, en Angular utilizas directivas para indicarle a la plantilla qué debe hacer o cómo debe mostrarse la interfaz según el
+estado de la aplicación.
+:::
+
+### 📌 Los 3 Tipos Principales de Directivas
+
+En la arquitectura de Angular existen tres categorías de directivas:
+| Tipo de Directiva | ¿Qué hace en la aplicación? | Ejemplo representativo |
+|-------------------|-----------------------------|------------------------|
+| Directivas de Componente (Component Directives) | Son directivas que llevan una plantilla HTML asociada. Constituyen los bloques principales de construcción de la SPA | `@Component({ selector: 'app-task-row', ... })` |
+| Directivas Estructurales (Structural Directives) | Modifican la estructura del DOM, añadiendo, eliminando o reemplazando elementos HTML según las condiciones del estado. | `@if (completada) { ... } @for (t of tareas; track t.id)` |
+|Directivas de Atributo (Attribute Directives) | Modifican el aspecto o comportamiento de un elemento existente sin alterar la estructura del árbol HTML. | `[class.completada]="tarea.completada" [ngStyle]="..."` |
+
+### ⚡ Evolución del Control de Flujo: Sintaxis Clásica vs. Sintaxis Moderna (Standalone)
+
+Históricamente, Angular utilizaba directivas estructurales basadas en asterisco que requerían importar el módulo
+CommonModule:
+
+* ❌ Sintaxis Clásica: `*ngIf="condicion"` y `*ngFor="let item of lista"`.
+
+En las versiones modernas de Angular Standalone, el framework utiliza el **Control de Flujo Nativo** (`@if`, `@for`,
+`@switch`). Estas directivas estructurales están integradas directamente en el compilador de plantillas, por lo que:
+
+1. No requieren importaciones adicionales en el decorador `@Component`.
+2. Maximizan el rendimiento de renderizado al exigir la propiedad clave track en las listas `@for`.
+3. Simplifican la lectura del HTML, ofreciendo bloques auxiliares `@else` y `@empty` de forma nativa.
+
+### 💻 Ejemplo Práctico Combinado
+
+El siguiente ejemplo muestra cómo conviven los tres tipos de directivas dentro de un mismo componente de Angular:
+
+```angular20svg
+import { Component } from '@angular/core';
+
+interface Tarea {
+  id: number;
+  titulo: string;
+  completada: boolean;
+}
+
+@Component ({
+selector: 'app-lista-directivas',
+standalone: true,
+template: '
+    <h2>Lista de Tareas con Directivas 🎯</h2>
+    <!-- 1. DIRECTIVA ESTRUCTURAL: @for recorre el array de datos -->
+    @for (t of tareas; track t.id) {
+    <!-- 2. DIRECTIVA DE ATRIBUTO: [class.hecha] conmuta la clase CSS según el booleano -->
+      <div class="card" [class.hecha]="t.completada">
+        <span>{{ t.titulo }}</span>
+        <!-- 3. DIRECTIVA ESTRUCTURAL: @if renderiza condicionalmente el bloque -->
+        @if (t.completada) {
+          <span class="badge">✅ Finalizada</span>
+        } @else {
+          <button (click)="marcar (t.id)">Marcar como hecha</button>
+          }
+      </div>
+      } @empty {
+        <p>No hay tareas registradas en la lista.</p>
+    }',
+styles: ['
+    .card { padding: 0.8rem; margin-bottom: 0.5rem; background: #2a2a35; border-radius: 6px; }
+    .hecha { opacity: 0.6; text-decoration: line-through; }
+    .badge { color: #4caf50; font-weight: bold; }
+  ']
+})
+export class ListaDirectivasComponent {
+  public tareas: Tarea[] = [
+    { id: 1, titulo: 'Entender qué es una directiva en Angular', completada: true },
+    { id: 2, titulo: 'Dominar @if y @for en componentes Standalone', completada: false }
+  ];
+
+  public marcar (id: number): void {
+    this.tareas = this.tareas.map (t => t.id === id ? { ...t, completada: true } : t);
+  }
+}
+```
 
 ### Renderizado Condicional: `@if` y `@else`
 
@@ -59,17 +152,20 @@ Sustituye la necesidad de mostrar u ocultar elementos mediante estilos `display:
 
 ### Iteración de Listas: `@for` y `@empty`
 
-Permite recorrer colecciones de datos (arrays de objetos) inyectando nodos HTML en el DOM. Es **obligatorio declarar la cláusula `track`** para permitir a Angular identificar cada elemento de forma única y optimizar el rendimiento de repintado.
+Permite recorrer colecciones de datos (arrays de objetos) inyectando nodos HTML en el DOM. Es **obligatorio declarar la
+cláusula `track`** para permitir a Angular identificar cada elemento de forma única y optimizar el rendimiento de
+repintado.
 
 ```html
+
 <ul>
   @for (tarea of listaTareas; track tarea.id) {
-    <li [class.completada]="tarea.completada">
-      <span>{{ tarea.titulo }} - <strong>{{ tarea.prioridad }}</strong></span>
-      <button (click)="completar(tarea.id)">Completar</button>
-    </li>
+  <li [class.completada]="tarea.completada">
+    <span>{{ tarea.titulo }} - <strong>{{ tarea.prioridad }}</strong></span>
+    <button (click)="completar(tarea.id)">Completar</button>
+  </li>
   } @empty {
-    <li class="empty-state">La lista de tareas está completamente vacía.</li>
+  <li class="empty-state">La lista de tareas está completamente vacía.</li>
   }
 </ul>
 ```
@@ -83,19 +179,21 @@ Permite recorrer colecciones de datos (arrays de objetos) inyectando nodos HTML 
 ### Ejercicio 6.1: Lista de Tareas Dinámica con `@for` y `@if` (`TaskListComponent`)
 
 **Enunciado:**  
-Crea un componente standalone llamado `TaskListComponent` que gestione una lista de tareas dinámica utilizando la interfaz `Tarea` vista en el Bloque 2:
+Crea un componente standalone llamado `TaskListComponent` que gestione una lista de tareas dinámica utilizando la
+interfaz `Tarea` vista en el Bloque 2:
 
 1. Define un array de tareas iniciales `tareas: Tarea[]`.
 2. Incluye una propiedad booleana `mostrarSoloPendientes: boolean = false`.
 3. En la plantilla HTML, utiliza la sintaxis `@for` con su correspondiente `track tarea.id` para renderizar el listado.
-4. Utiliza `@if` para mostrar una etiqueta visual `'[COMPLETADA]'` solo en aquellas tareas cuyo estado `completada` sea `true`.
+4. Utiliza `@if` para mostrar una etiqueta visual `'[COMPLETADA]'` solo en aquellas tareas cuyo estado `completada` sea
+   `true`.
 5. Incluye un botón para conmutar el filtro `mostrarSoloPendientes`.
 
 <details>
 <summary>🔍 Haz clic aquí para ver la solución en TypeScript y HTML</summary>
 
 ```typescript
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 interface Tarea {
   id: number;
@@ -143,9 +241,9 @@ export class TaskListComponent {
   public mostrarSoloPendientes: boolean = false;
 
   public tareas: Tarea[] = [
-    { id: 1, titulo: 'Configurar Angular CLI', prioridad: 'Alta', completada: true },
-    { id: 2, titulo: 'Aprender sintaxis @for y @if', prioridad: 'Alta', completada: false },
-    { id: 3, titulo: 'Diseñar interfaz con CSS', prioridad: 'Baja', completada: false }
+    {id: 1, titulo: 'Configurar Angular CLI', prioridad: 'Alta', completada: true},
+    {id: 2, titulo: 'Aprender sintaxis @for y @if', prioridad: 'Alta', completada: false},
+    {id: 3, titulo: 'Diseñar interfaz con CSS', prioridad: 'Baja', completada: false}
   ];
 
   public get tareasObtenidas(): Tarea[] {
@@ -160,7 +258,7 @@ export class TaskListComponent {
   }
 
   public marcarCompletada(id: number): void {
-    this.tareas = this.tareas.map(t => t.id === id ? { ...t, completada: true } : t);
+    this.tareas = this.tareas.map(t => t.id === id ? {...t, completada: true} : t);
   }
 }
 ```

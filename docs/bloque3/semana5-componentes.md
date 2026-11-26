@@ -1,4 +1,4 @@
-# 🦅 Semana 5: Entorno Angular CLI y Componentes Standalone
+# 🦅 3.1. Entorno Angular CLI y Componentes Standalone
 
 En esta semana realizamos el cambio de paradigma principal del curso: pasamos de la manipulación imperativa del DOM en JavaScript nativo a la **programación declarativa** con Angular. 
 

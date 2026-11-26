@@ -1,4 +1,4 @@
-# 🔄 Semana 7: Paso de Datos entre Componentes y Servicios Centralizados
+# 🔄 3.3. Paso de Datos entre Componentes y Servicios Centralizados
 
 En esta semana aprendemos a estructurar aplicaciones web modulares dividiendo la interfaz en componentes padre/hijo y aislando la lógica de datos mediante **servicios centralizados e Inyección de Dependencias**.
 
